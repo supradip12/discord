@@ -1,5 +1,6 @@
 import { SignIn } from "@clerk/nextjs";
-// Auth completed
+// Auth complet
+
 export default function Page() {
   return <SignIn />;
 }
