@@ -24,6 +24,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
+import { FileUpload } from "@/components/file-upload";
 // import { FileUpload } from "@/components/file-upload";
 
 const formSchema = z.object({
@@ -84,8 +85,11 @@ const InitialModal = () => {
                   render={({ field }) => (
                     <FormItem>
                       <FormControl>
-                        {/* Setting uploading things and now creating folderfileupload. Also add api file in middleware to avoid error. This is given in uploadthings */}
-                        FileUpload
+                        <FileUpload
+                          endpoint="serverImage"
+                          value={field.value}
+                          onChange={field.onChange}
+                        />
                       </FormControl>
                     </FormItem>
                   )}
