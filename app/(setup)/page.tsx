@@ -1,6 +1,7 @@
 import { db } from "@/lib/db";
 import { redirect } from "next/navigation";
 import { initialProfile } from "@/lib/initial-profile";
+import InitialModal from "@/components/modals/initial-modal";
 
 const page = async () => {
   const profile = await initialProfile();
@@ -21,7 +22,7 @@ const page = async () => {
     return redirect(`/servers/${server.id}`);
   }
 
-  return <div>Create a server</div>;
+  return <InitialModal />;
 };
 
 export default page;
