@@ -97,7 +97,7 @@ const InitialModal = () => {
               </div>
               <FormField
                 control={form.control}
-                name="imageUrl"
+                name="name"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className="uppercase text-xs font-bold text-zinc-500 dark:text-secondary/70">
