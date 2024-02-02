@@ -1,24 +1,25 @@
+
 datasource db {
-  provider     = "mysql"
-  url          = env("DATABASE_URL")
-  relationMode = "prisma"
+  provider = "cockroachdb"
+  url      = env("DATABASE_URL")
+
 }
 
 generator client {
   provider = "prisma-client-js"
 }
 
+
 model Profile {
   id String @id @default(uuid())
   userId String @unique
   name String
-  imageUrl String @db.Text
-  email String @db.Text
+  imageUrl String 
+  email String
 
- servers Server[]
+  servers Server[]
   members Member[]
   channels Channel[]
- 
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -27,15 +28,14 @@ model Profile {
 model Server {
   id String @id @default(uuid())
   name String
-  imageUrl String @db.Text
+  imageUrl String 
   inviteCode String @unique
 
   profileId String
   profile Profile @relation(fields: [profileId], references: [id], onDelete: Cascade)
 
-
- members Member[]
- channels Channel[]
+  members Member[]
+  channels Channel[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -100,11 +100,11 @@ model Channel {
 
 model Message {
   id String @id @default(uuid())
-  content String @db.Text
+  content String 
 
-  fileUrl String? @db.Text // Optional String
+  fileUrl String? 
 
-  memberId String // Who send the message
+  memberId String
   member Member @relation(fields: [memberId], references: [id], onDelete: Cascade)
 
   channelId String
@@ -134,11 +134,11 @@ model Conversation {
 
   @@unique([memberOneId, memberTwoId])
 }
-// One to one communication
+
 model DirectMessage {
   id String @id @default(uuid())
-  content String @db.Text
-  fileUrl String? @db.Text
+  content String 
+  fileUrl String?
 
   memberId String
   member Member @relation(fields: [memberId], references: [id], onDelete: Cascade)
@@ -154,5 +154,3 @@ model DirectMessage {
   @@index([memberId])
   @@index([conversationId])
 }
-
-
